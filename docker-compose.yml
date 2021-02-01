@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+  titanic-ann:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    entrypoint: ["java", "--class-path", "src/main/bin:src/main/resources/encog-core-3.4.jar", "Titanic"]
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    entrypoint: ["java", "-jar", "src/test/resources/junit-platform-console-standalone-1.7.2.jar", "--class-path", "src/main/bin:src/test/bin:src/main/resources/encog-core-3.4.jar:src/test/resources/junit-platform-console-standalone-1.7.2.jar", "--scan-class-path"]
